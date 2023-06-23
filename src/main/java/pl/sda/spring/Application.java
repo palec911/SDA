@@ -1,13 +1,14 @@
 package pl.sda.spring;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@SpringBootApplication
-public class Application {
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+public class Application
+{
+    public static void main(String args[])
+    {
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:beans.xml");
+        Library library = (Library) appContext.getBean("library");
+        library.getBook().getBookDetails();
     }
-
 }
