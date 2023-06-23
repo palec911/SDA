@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class CoachWithFieldInjection implements CommandLineRunner {
 
     @Autowired
-    private Coach footballCoach;
+    private @Qualifier("footballCoach") Coach coach;
 
     @Override
     public void run(final String... args) throws Exception {
-        System.out.println(footballCoach.getDailyWorkout());
+        System.out.println(coach.getDailyWorkout());
     }
 }
