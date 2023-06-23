@@ -1,6 +1,7 @@
 package pl.sda.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +11,9 @@ public class CoachWithConstructorInjection implements CommandLineRunner {
     private Coach coach;
 
     @Autowired
-    public CoachWithConstructorInjection(Coach myCoach) {
+    public CoachWithConstructorInjection(@Qualifier("trackNFieldCoach") Coach myCoach) {
         coach = myCoach;
     }
-
 
 
     @Override
