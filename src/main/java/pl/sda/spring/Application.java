@@ -10,5 +10,6 @@ public class Application
         ApplicationContext appContext = new ClassPathXmlApplicationContext("classpath:beans.xml");
         Library library = (Library) appContext.getBean("library");
         library.getBook().getBookDetails();
+        library.getMagazine().getMagazineDetails();
     }
 }
