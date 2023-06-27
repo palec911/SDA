@@ -3,14 +3,12 @@ package pl.sda.spring.rest;
 import jakarta.annotation.PostConstruct;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.spring.entity.Student;
 
 import java.util.ArrayList;
 
+@RestController
 public class StudentRestController {
 
     ArrayList<Student> studentsList;
@@ -32,11 +30,22 @@ public class StudentRestController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleExcception(StudentErrorResponse exc) {
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc) {
         StudentErrorResponse error = new StudentErrorResponse();
         error.setMessage(exc.getMessage());
         error.setStatus(404);
         error.setTimestamp(System.currentTimeMillis());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(Exception exc) {
+        StudentErrorResponse error = new StudentErrorResponse();
+
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(exc.getMessage());
+        error.setTimestamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
