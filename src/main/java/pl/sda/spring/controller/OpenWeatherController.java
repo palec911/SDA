@@ -24,7 +24,7 @@ public class OpenWeatherController {
     public ResponseEntity<String> getWeatherByCityName(@PathVariable String cityName) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String responseBody = weatherService.getWeatherDetailsByCityName(cityName);
+        String responseBody = weatherService.getWeatherDetailsByCityName(cityName).getBody();
         return ResponseEntity.ok().headers(headers).body(responseBody);
     }
 
