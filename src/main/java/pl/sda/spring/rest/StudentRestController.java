@@ -32,7 +32,7 @@ public class StudentRestController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleExcception(StudentErrorResponse exc) {
+    public ResponseEntity<StudentErrorResponse> handleExcception(StudentNotFoundException exc) {
         StudentErrorResponse error = new StudentErrorResponse();
         error.setMessage(exc.getMessage());
         error.setStatus(404);
