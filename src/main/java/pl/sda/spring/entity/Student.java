@@ -1,10 +1,20 @@
-package pl.sda.spring;
+package pl.sda.spring.entity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "student")
 public class Student {
+
+    public Student(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public Student() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
