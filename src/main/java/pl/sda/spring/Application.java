@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import pl.sda.spring.dao.StudentDAO;
 import pl.sda.spring.entity.Student;
 
+import java.util.List;
+
 @SpringBootApplication
 public class Application {
 
@@ -31,7 +33,9 @@ public class Application {
             System.out.println("Getting tudent with id " + student.getId());
             Student studentRetrieved = studentDAO.findById(student.getId());
             System.out.println("Retrieved student :" + studentRetrieved);
-
+            System.out.println("Getting all students as a list");
+            List<Student> allStudents = studentDAO.findAll();
+            allStudents.forEach(System.out::println);
         };
     }
 }
