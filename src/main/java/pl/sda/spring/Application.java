@@ -36,6 +36,8 @@ public class Application {
             System.out.println("Getting all students as a list");
             List<Student> allStudents = studentDAO.findAll();
             allStudents.forEach(System.out::println);
+            List<Student> studentsWithLastName = studentDAO.findByLastName("Palczewski");
+            studentsWithLastName.forEach(System.out::println);
         };
     }
 }
