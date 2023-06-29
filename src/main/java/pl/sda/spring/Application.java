@@ -31,10 +31,10 @@ public class Application {
             retrieveStudentById(student.getId());
             getAllStudents();
             getAllStudentsByLastName("Palczewski");
-            updateStudentById(3L);
-            updateAllLastNames("Kowalski");
-            removeById(10L);
-            deleteAll();
+//            updateStudentById(3L);
+//            updateAllLastNames("Kowalski");
+//            removeById(10L);
+//            deleteAll();
         };
     }
     public void saveStudent(Student student) {
