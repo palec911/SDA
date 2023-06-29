@@ -33,6 +33,7 @@ public class Application {
             getAllStudentsByLastName("Palczewski");
             updateStudentById(3L);
             updateAllLastNames("Kowalski");
+            removeById(11L);
         };
     }
     public void saveStudent(Student student) {
@@ -68,5 +69,10 @@ public class Application {
     public void updateAllLastNames(String lastName) {
         System.out.println("Updating all last names to " + lastName);
         System.out.println(studentDAO.updateAllByLastName(lastName));
+    }
+
+    public void removeById(Long id) {
+        System.out.println("Removing student with id "+ id);
+        studentDAO.deleteOne(id);
     }
 }
