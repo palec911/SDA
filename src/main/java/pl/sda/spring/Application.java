@@ -28,6 +28,10 @@ public class Application {
             System.out.println("Saving " + student.toString() + " in database");
             studentDAO.save(student);
             System.out.println("Student with id " + student.getId() + " saved");
+            System.out.println("Getting tudent with id " + student.getId());
+            Student studentRetrieved = studentDAO.findById(student.getId());
+            System.out.println("Retrieved student :" + studentRetrieved);
+
         };
     }
 }

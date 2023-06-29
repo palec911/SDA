@@ -4,6 +4,8 @@ import pl.sda.spring.entity.Student;
 
 public interface StudentDAO {
 
-    public void save(Student student);
+    void save(Student student);
+
+    Student findById(Long id);
 
 }
