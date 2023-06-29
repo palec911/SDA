@@ -27,17 +27,46 @@ public class Application {
     public CommandLineRunner run() {
         return args -> {
             Student student = new Student("Piotr", "Palczewski", "ppalczew@gmail.com");
-            System.out.println("Saving " + student.toString() + " in database");
-            studentDAO.save(student);
-            System.out.println("Student with id " + student.getId() + " saved");
-            System.out.println("Getting tudent with id " + student.getId());
-            Student studentRetrieved = studentDAO.findById(student.getId());
-            System.out.println("Retrieved student :" + studentRetrieved);
-            System.out.println("Getting all students as a list");
-            List<Student> allStudents = studentDAO.findAll();
-            allStudents.forEach(System.out::println);
-            List<Student> studentsWithLastName = studentDAO.findByLastName("Palczewski");
-            studentsWithLastName.forEach(System.out::println);
+            saveStudent(student);
+            retrieveStudentById(student.getId());
+            getAllStudents();
+            getAllStudentsByLastName("Palczewski");
+            updateStudentById(3L);
+            updateAllLastNames("Kowalski");
         };
+    }
+    public void saveStudent(Student student) {
+        System.out.println("Saving " + student.toString() + " in database");
+        studentDAO.save(student);
+        System.out.println("Student with id " + student.getId() + " saved");
+    }
+
+    public void retrieveStudentById(Long id) {
+        System.out.println("Getting student with id " + id);
+        Student studentRetrieved = studentDAO.findById(id);
+        System.out.println("Retrieved student :" + studentRetrieved);
+    }
+
+    public void getAllStudents() {
+        System.out.println("Getting all students as a list");
+        List<Student> allStudents = studentDAO.findAll();
+        allStudents.forEach(System.out::println);
+    }
+
+    public void getAllStudentsByLastName(String lastName) {
+        List<Student> studentsWithLastName = studentDAO.findByLastName(lastName);
+        studentsWithLastName.forEach(System.out::println);
+    }
+
+    public void updateStudentById(Long id) {
+        Student studentToBeUpdated = studentDAO.findById(id);
+        studentToBeUpdated.setFirstName("Andrzej");
+        studentDAO.updateOne(studentToBeUpdated);
+        System.out.println("Updated student : " + studentToBeUpdated);
+    }
+
+    public void updateAllLastNames(String lastName) {
+        System.out.println("Updating all last names to " + lastName);
+        System.out.println(studentDAO.updateAllByLastName(lastName));
     }
 }
