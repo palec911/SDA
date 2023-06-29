@@ -33,7 +33,8 @@ public class Application {
             getAllStudentsByLastName("Palczewski");
             updateStudentById(3L);
             updateAllLastNames("Kowalski");
-            removeById(11L);
+            removeById(10L);
+            deleteAll();
         };
     }
     public void saveStudent(Student student) {
@@ -74,5 +75,11 @@ public class Application {
     public void removeById(Long id) {
         System.out.println("Removing student with id "+ id);
         studentDAO.deleteOne(id);
+    }
+
+    public void deleteAll() {
+        System.out.println("WARNING removing all from DB");
+        studentDAO.deleteAll();
+        System.out.println("DB is clear");
     }
 }
