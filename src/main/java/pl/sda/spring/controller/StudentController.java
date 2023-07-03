@@ -14,61 +14,66 @@ public class StudentController {
     private StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    public StudentController(StudentService theEmployeeService) {
+        studentService = theEmployeeService;
     }
 
-    @GetMapping("/students")
+    // expose "/employees" and return a list of employees
+    @GetMapping("/student")
     public List<Student> findAll() {
         return studentService.findAll();
     }
 
     // add mapping for GET /employees/{employeeId}
 
-    @GetMapping("/students/{studentId}")
+    @GetMapping("/student/{studentId}")
     public Student getEmployee(@PathVariable Long studentId) {
 
-        Student student = studentService.findById(studentId);
+        Student theEmployee = studentService.findById(studentId);
 
-        if (student == null) {
-            throw new RuntimeException("Student id not found - " + studentId);
+        if (theEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + studentId);
         }
 
-        return student;
+        return theEmployee;
     }
 
     // add mapping for POST /employees - add new employee
 
-    @PostMapping("/students")
-    public Student addStudent(@RequestBody Student student) {
+    @PostMapping("/student")
+    public Student addEmployee(@RequestBody Student student) {
+
+        // also just in case they pass an id in JSON ... set id to 0
+        // this is to force a save of new item ... instead of update
 
         student.setId(0L);
 
-        Student savedStudent = studentService.saveStudent(student);
+        Student dbEmployee = studentService.saveStudent(student);
 
-        return savedStudent;
+        return dbEmployee;
     }
 
     // add mapping for PUT /employees - update existing employee
 
-    @PutMapping("/students")
-    public Student updateStudent(@RequestBody Student student) {
+    @PutMapping("/student")
+    public Student updateEmployee(@RequestBody Student theEmployee) {
 
-        Student savedStudent = studentService.saveStudent(student);
+        Student dbEmployee = studentService.saveStudent(theEmployee);
 
-        return savedStudent;
+        return dbEmployee;
     }
 
+    // add mapping for DELETE /employees/{employeeId} - delete employee
 
-    @DeleteMapping("/students/{studentId}")
+    @DeleteMapping("/student/{studentId}")
     public String deleteEmployee(@PathVariable Long studentId) {
 
-        Student studentToDelete = studentService.findById(studentId);
+        Student tempEmployee = studentService.findById(studentId);
 
         // throw exception if null
 
-        if (studentToDelete == null) {
-            throw new RuntimeException("Student id not found - " + studentId);
+        if (tempEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + studentId);
         }
 
         studentService.deleteById(studentId);
