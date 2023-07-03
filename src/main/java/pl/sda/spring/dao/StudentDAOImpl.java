@@ -19,9 +19,9 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
-    public void save(Student student) {
+    public Student save(Student student) {
         entityManager.persist(student);
+        return student;
     }
 
     @Override
@@ -42,13 +42,11 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public void updateOne(Student student) {
         entityManager.merge(student);
     }
 
     @Override
-    @Transactional
     public int updateAllByLastName(String lastNameToUpdate) {
         Query query = entityManager.createQuery("UPDATE Student SET lastName= :lastNameToUpdate");
         query.setParameter("lastNameToUpdate", lastNameToUpdate);
@@ -56,7 +54,6 @@ public class StudentDAOImpl implements StudentDAO {
 
     }
     @Override
-    @Transactional
     public void deleteOne(Long id) {
         Student studentToBeRemoved = entityManager.find(Student.class, id);
         entityManager.remove(studentToBeRemoved);
@@ -64,7 +61,6 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    @Transactional
     public int deleteAll() {
         return entityManager.createQuery("DELETE from Student ").executeUpdate();
     }
