@@ -9,12 +9,18 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-  <title>Employee Directory</title>
+  <title>Pet Directory</title>
 </head>
 
 <body>
 
 <div class="container">
+
+  <!-- Add a button -->
+  <a th:href="@{/addPetForm}"
+     class="btn btn-primary btn-sm mb-3">
+    Add Pet
+  </a>
 
   <h3>Pets</h3>
   <hr>
@@ -33,7 +39,7 @@
 
       <td th:text="${thePet.name}" />
       <td th:text="${thePet.date}" />
-      <td th:text="${thePet.petType}" />
+      <td th:text="${thePet.petType.displayName}" />
 
     </tr>
     </tbody>

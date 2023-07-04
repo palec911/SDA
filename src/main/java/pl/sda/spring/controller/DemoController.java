@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.sda.spring.model.Owner;
-import pl.sda.spring.model.Vet;
-import pl.sda.spring.model.VetSpeciality;
-import pl.sda.spring.model.Visit;
+import pl.sda.spring.model.*;
 import pl.sda.spring.services.*;
 
 import java.util.Set;
@@ -89,6 +86,21 @@ public class DemoController {
         model.addAttribute("pets", petServiceJPA.getAllPets());
 
         return "list-pets";
+    }
+
+    @PostMapping("/pet")
+    public String savePet(@ModelAttribute("pet") Pet pet) {
+        petServiceJPA.createPet(pet);
+
+        return "redirect:/pets";
+    }
+
+    @GetMapping("/addPetForm")
+    public String addPetForm(Model model) {
+        Pet pet = new Pet();
+        model.addAttribute(pet);
+
+        return "petForm";
     }
 
 }
