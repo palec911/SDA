@@ -2,6 +2,8 @@ package pl.sda.spring.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.spring.model.Owner;
 import pl.sda.spring.model.Vet;
@@ -11,7 +13,7 @@ import pl.sda.spring.services.*;
 
 import java.util.Set;
 
-@RestController
+@Controller
 public class DemoController {
     PetServiceJPA petServiceJPA;
     OwnerServiceJPA ownerServiceJPA;
@@ -19,7 +21,11 @@ public class DemoController {
     VetService vetService;
     VetSpecialityService vetSpecialityService;
 
-    public DemoController(PetServiceJPA petServiceJPA, OwnerServiceJPA ownerServiceJPA, VisitService visitService, VetService vetService, VetSpecialityService vetSpecialityService) {
+    public DemoController(PetServiceJPA petServiceJPA,
+                          OwnerServiceJPA ownerServiceJPA,
+                          VisitService visitService,
+                          VetService vetService,
+                          VetSpecialityService vetSpecialityService) {
         this.petServiceJPA = petServiceJPA;
         this.ownerServiceJPA = ownerServiceJPA;
         this.visitService = visitService;
@@ -70,6 +76,13 @@ public class DemoController {
         specialitiesToSet.setVets(vets);
         vetSpecialityService.saveSpeciality(specialitiesToSet);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @GetMapping("/hello")
+    public String homepage(Model model) {
+        model.addAttribute("theDate", new java.util.Date());
+
+        return "helloworld";
+
     }
 
 }
