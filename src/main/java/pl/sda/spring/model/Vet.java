@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,9 +25,10 @@ public class Vet {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,
             CascadeType.MERGE})
-    @JoinTable(name = "vet_specialities", joinColumns = @JoinColumn(name = "vet_id"),
-    inverseJoinColumns = @JoinColumn(name = "speciality_id"))
-    private Set<VetSpeciality> specialities;
+    @JoinTable(name = "vet_specialities",
+            joinColumns = @JoinColumn(name = "vet_id"),
+            inverseJoinColumns = @JoinColumn(name = "speciality_id"))
+    private Set<VetSpeciality> specialities = new HashSet<>();
 
     public Vet(String firstName, String lastName, Set<VetSpeciality> specialities) {
         this.firstName = firstName;

@@ -33,7 +33,7 @@ public class Pet {
     @JoinColumn(name = "notes_id")
     private Notes notes;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     private Set<Visit> visits = new HashSet<>();
 
