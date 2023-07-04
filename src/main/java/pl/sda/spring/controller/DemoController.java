@@ -82,7 +82,13 @@ public class DemoController {
         model.addAttribute("theDate", new java.util.Date());
 
         return "helloworld";
+    }
 
+    @GetMapping("/pets")
+    public String getPets(Model model) {
+        model.addAttribute("pets", petServiceJPA.getAllPets());
+
+        return "list-pets";
     }
 
 }

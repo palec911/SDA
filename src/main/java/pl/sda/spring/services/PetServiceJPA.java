@@ -26,6 +26,10 @@ public class PetServiceJPA {
         return Optional.of(petRepository.save(pet));
     }
 
+    public List<Pet> getAllPets() {
+        return petRepository.findAll();
+    }
+
     public Set<Pet> getPetsByOwnerId(Long ownerId) {
         Owner owner = ownerRepository.findById(ownerId).get();
         return owner.getPets();
