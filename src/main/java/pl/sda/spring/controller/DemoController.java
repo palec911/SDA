@@ -85,7 +85,7 @@ public class DemoController {
     public String getPets(Model model) {
         model.addAttribute("pets", petServiceJPA.getAllPets());
 
-        return "list-pets";
+        return "petClinic";
     }
 
     @PostMapping("/pet")

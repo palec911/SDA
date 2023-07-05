@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Clinic Landing Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .jumbotron {
+      background-color: #f8f9fa;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      margin-bottom: 1rem;
+    }
+
+    .card-body {
+      display: none;
+    }
+
+    .card.active .card-body {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+<div class="jumbotron text-center">
+  <h1 class="display-4">Welcome to Pet Clinic</h1>
+  <p class="lead">Providing quality care for your pets</p>
+</div>
+<div class="row d-flex justify-content-center">
+  <div id="accordianId" role="tablist" aria-multiselectable="true" style="width: 40%;">
+    <div class="card mb-0">
+      <div class="card-header" role="tab" id="section1HeaderId">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true" aria-controls="section1ContentId">
+            Pets
+          </a>
+        </h5>
+      </div>
+      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId">
+        <div class="card-body">
+          <div class="container " >
+            <h3><a th:href="@{/addPetForm}"
+                        class="btn btn-primary btn-sm mb-0">
+              Add Pet
+            </a></h3>
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Owner</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Max</td>
+                <td>Dog</td>
+                <td>John Smith</td>
+              </tr>
+              <tr>
+                <td>Bella</td>
+                <td>Cat</td>
+                <td>Emily Johnson</td>
+              </tr>
+              <tr>
+                <td>Charlie</td>
+                <td>Dog</td>
+                <td>Michael Davis</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" role="tab" id="section2HeaderId">
+        <h5 class="mb-0">
+          <a data-toggle="collapse" data-parent="#accordianId" href="#section2ContentId" aria-expanded="true" aria-controls="section2ContentId">
+            Vets
+          </a>
+        </h5>
+      </div>
+      <div id="section2ContentId" class="collapse in" role="tabpanel" aria-labelledby="section2HeaderId">
+        <div class="card-body">
+          Section 2 content
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.card-header').on('click', function () {
+      $(this).parent('.card').toggleClass('active');
+    });
+  });
+</script>
+</body>
+
+</html>
