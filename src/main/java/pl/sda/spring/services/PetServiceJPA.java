@@ -35,4 +35,8 @@ public class PetServiceJPA {
         return owner.getPets();
     }
 
+    public void deletePetById(Long petId) {
+        petRepository.deleteById(petId);
+    }
+
 }

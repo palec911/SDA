@@ -19,10 +19,12 @@
   <h3>Pet Directory</h3>
   <hr>
 
-  <p class="h4 mb-4">Save Employee</p>
+  <p class="h4 mb-4">Save Pet</p>
 
   <form action="#" th:action="@{/pet}"
-        th:object="${pet}" method="POST">
+                   th:object="${pet}" method="POST">
+
+    <input type="hidden" th:field="*{petId}">
 
     <input type="text" th:field="*{name}"
            class="form-control mb-4 w-25" placeholder="First name">

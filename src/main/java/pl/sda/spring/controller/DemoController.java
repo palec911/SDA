@@ -100,7 +100,20 @@ public class DemoController {
         Pet pet = new Pet();
         model.addAttribute(pet);
 
-        return "petForm";
+        return "petAddForm";
+    }
+
+    @GetMapping("/updatePetForm")
+    public String updatePetForm(Model model, @RequestParam("petId") Long petId) {
+        Pet petToUpdate = petServiceJPA.getPetById(petId).get();
+        model.addAttribute("pet", petToUpdate);
+        return "petAddForm";
+    }
+
+    @GetMapping("/deletePet")
+    public String removePet(@RequestParam("petId") Long petId) {
+        petServiceJPA.deletePetById(petId);
+        return "redirect:/pets";
     }
 
 }
