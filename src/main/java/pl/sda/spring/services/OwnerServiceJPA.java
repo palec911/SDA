@@ -7,6 +7,7 @@ import pl.sda.spring.model.Pet;
 import pl.sda.spring.repositories.OwnerRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,6 +29,10 @@ public class OwnerServiceJPA {
 
     public Owner getOwnerById(long id) {
         return ownerRepository.findById(id).get();
+    }
+
+    public List<Owner> getAllOwners() {
+        return ownerRepository.findAll();
     }
 
 
