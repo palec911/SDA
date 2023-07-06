@@ -29,6 +29,15 @@ public class DemoController {
         this.vetService = vetService;
         this.vetSpecialityService = vetSpecialityService;
     }
+    @GetMapping("/")
+    public String index(Model model) {
+        return "index";
+    }
+    @GetMapping("/login")
+    public String loginPage() {
+        return "custom-login";
+    }
+
     @GetMapping("/hello")
     public String homepage(Model model) {
         model.addAttribute("theDate", new java.util.Date());

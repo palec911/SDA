@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -32,16 +35,23 @@ public class SecurityConfig {
         http.authorizeHttpRequests( config ->
                 config
                         .requestMatchers(HttpMethod.GET, "/api/owners").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pets").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/api/createVet").hasRole("VET")
                         .requestMatchers(HttpMethod.POST, "/api/createSpeciality").hasRole("ADMIN"));
 
-        http.httpBasic(Customizer.withDefaults());
 
+//        http.formLogin(Customizer.withDefaults());
+        http.formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateUser")
+                .permitAll());
+        http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 
-        /*@Bean
+/*        @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails ppalczew = User.builder()
                 .username("ppalczew")
@@ -62,6 +72,6 @@ public class SecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(sda,ppalczew,ahyz);
-    }
-*/
+    }*/
+
 }
