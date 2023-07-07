@@ -52,6 +52,21 @@ public class DemoController {
         return "petClinic";
     }
 
+    @GetMapping("/addSpecialities")
+    public String addSpecialities(Model model) {
+        VetSpeciality speciality = new VetSpeciality();
+        model.addAttribute("vetSpeciality", speciality);
+
+        return "specialityAddForm";
+    }
+
+    @PostMapping("/createSpeciality")
+    public String createSpeciality(@ModelAttribute VetSpeciality vetSpeciality) {
+        vetSpecialityService.saveSpeciality(vetSpeciality);
+        System.out.println("Created vet speciality " + vetSpeciality);
+        return "redirect:/addSpecialities?success";
+    }
+
     @PostMapping("/pet")
     public String savePet(@ModelAttribute("pet") Pet pet) {
         petServiceJPA.createPet(pet);

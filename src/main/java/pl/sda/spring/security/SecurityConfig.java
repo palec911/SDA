@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/pets").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/api/createVet").hasRole("VET")
                         .requestMatchers(HttpMethod.POST, "/api/createSpeciality").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/addSpecialities").hasRole("ADMIN")
         ).logout( logout -> logout.permitAll());
 
 
@@ -47,7 +48,13 @@ public class SecurityConfig {
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateUser")
                 .permitAll());
-        http.httpBasic(Customizer.withDefaults());
+        http
+            .authorizeHttpRequests()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .httpBasic();
+
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }

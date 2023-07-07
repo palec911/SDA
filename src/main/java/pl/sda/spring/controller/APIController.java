@@ -3,10 +3,7 @@ package pl.sda.spring.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sda.spring.model.Owner;
-import pl.sda.spring.model.Vet;
-import pl.sda.spring.model.VetSpeciality;
-import pl.sda.spring.model.Visit;
+import pl.sda.spring.model.*;
 import pl.sda.spring.services.*;
 
 import java.util.List;
